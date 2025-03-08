@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 flex justify-center items-center min-h-screen">
+
+    <div class="w-full max-w-lg bg-white p-8 rounded-lg shadow-xl transform transition-all duration-300 ease-in-out hover:scale-105">
+        <h2 class="text-4xl font-semibold text-gray-900 mb-8 text-center">Edit Student</h2>
+
+        <form method="POST" class="space-y-6">
+            {% csrf_token %}
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-1">First Name:</label>
+                    <input type="text" name="first_name" value="{{ student.first_name }}" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-1">Last Name:</label>
+                    <input type="text" name="last_name" value="{{ student.last_name }}" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-1">Email:</label>
+                    <input type="email" name="email" value="{{ student.email }}" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-1">Date of Birth:</label>
+                    <input type="date" name="date_of_birth" value="{{ student.date_of_birth|date:'Y-m-d' }}" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-1">Course:</label>
+                    <select name="course" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+                        <option value="Computer Science" {% if student.course == "Computer Science" %}selected{% endif %}>Computer Science</option>
+                        <option value="Information Technology" {% if student.course == "Information Technology" %}selected{% endif %}>Information Technology</option>
+                        <option value="ACT" {% if student.course == "ACT" %}selected{% endif %}>ACT</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-1">Enrollment Date:</label>
+                    <input type="date" name="enrollment_date" value="{{ student.enrollment_date|date:'Y-m-d' }}" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+                </div>
+            </div>
+
+            <div class="text-center mt-6">
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg shadow-md transform transition-all duration-300 hover:bg-blue-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                    Update Student
+                </button>
+            </div>
+        </form>
+
+        <div class="text-center mt-6">
+            <a href="{% url 'student_list' %}" class="text-blue-600 hover:underline font-medium">
+                Cancel
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

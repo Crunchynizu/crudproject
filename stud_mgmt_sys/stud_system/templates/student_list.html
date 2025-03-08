@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-200 via-pink-100 to-yellow-100 flex justify-center items-center min-h-screen">
+    <div class="w-full max-w-5xl bg-white p-8 shadow-xl rounded-2xl animate-fadeIn">
+        <h2 class="text-4xl font-extrabold mb-6 text-center text-gray-900">Student List</h2>
+        <table class="w-full border-collapse shadow-md rounded-lg overflow-hidden">
+            <thead>
+                <tr class="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
+                    <th class="border p-3">Student ID</th>
+                    <th class="border p-3">Full Name</th>
+                    <th class="border p-3">Email</th>
+                    <th class="border p-3">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white">
+                {% for student in students %}
+                <tr class="border-b hover:bg-gray-100 transition duration-200">
+                    <td class="border p-3 text-center">{{ student.student_id }}</td>
+                    <td class="border p-3 text-center">{{ student.first_name }} {{ student.last_name }}</td>
+                    <td class="border p-3 text-center">{{ student.email }}</td>
+                    <td class="border p-3 text-center space-x-2">
+                        <a href="{% url 'student_detail' student.student_id %}" class="text-blue-500 font-bold hover:text-blue-700 transition">View</a>
+                        <a href="{% url 'student_update' student.student_id %}" class="text-purple-600 font-bold hover:text-purple-800 transition">Edit</a>
+                        <a href="{% url 'student_delete' student.student_id %}" class="text-red-500 font-bold hover:text-red-700 transition">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-center mt-6">
+            <a href="{% url 'student_create' %}" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg shadow-lg font-bold hover:scale-105 transition-transform">Add Student</a>
+        </div>
+    </div>
+</body>
+</html>
